@@ -1,0 +1,55 @@
+﻿@model _3._1.Models.Calculate
+@{
+	ViewBag.Title = "Calc";
+}
+
+<table>
+	<tr>
+		<td>
+			<input type="text" id="oper1" value="@Model.Oper1" />
+		</td>
+		<td>
+			<select id="operation" >
+				<option @(Model.Operation == "+" ? "selected='selected'" : "") value="+">+</option>
+				<option @(Model.Operation == "-" ? "selected='selected'" : "") value="-">-</option>
+				<option @(Model.Operation == "*" ? "selected='selected'" : "") value="*">*</option>
+				<option @(Model.Operation == "/" ? "selected='selected'" : "") value="/">/</option>
+			</select>
+		</td>
+		<td>
+			<input type="text" id="oper2" value="@Model.Oper2" />
+		</td>
+		<td>
+			<input type="button" value="=" onclick="calculate()" />
+		</td>
+		<td>
+			<span>@Model.Result</span>
+		</td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+	function calculate() {
+
+		const operand1Value = document.getElementById("oper1").value;
+		const operand2Value = document.getElementById("oper2").value;
+		const operationValue = document.getElementById("operation").value;
+
+		const operationUrlPart = getOperationPath(operationValue);
+
+		window.location = "/calc/" + operationUrlPart + "/" + operand1Value + "/" + operand2Value;
+		}
+
+		function getOperationPath(operation) {
+			switch (operation) {
+				case "-":
+					return "Sub";
+				case "*":
+					return "Mul";
+				case "/":
+					return "Div";
+				default:
+					return "Add";
+			}
+		}
+</script>

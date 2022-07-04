@@ -1,0 +1,6 @@
+﻿1, Mobile Phone, 600, 128gb, 12
+2, Laptop, 3200, 1Tb, 0
+3, Keyboard, 35, eng, 1
+4, Mouse, 10, usb, 12
+5, Pen, 1, blue, 12
+6, Notebook, 1, 128 pages, 12

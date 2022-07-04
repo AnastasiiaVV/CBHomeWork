@@ -1,0 +1,8 @@
+﻿@model _4.Model.ReturnDataTime
+@{
+	ViewData["Title"] = "Страница 1";
+	Layout = "_Layout";
+}
+<p>
+	@await Html.PartialAsync("_GetTime", Model)
+</p>

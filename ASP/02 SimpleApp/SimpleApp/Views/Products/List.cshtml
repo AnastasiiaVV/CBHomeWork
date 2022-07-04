@@ -1,0 +1,74 @@
+﻿
+@model List<SimpleApp.Models.Product>
+@*
+	Razor - синтаксис для внедрения серверного кода в HTML страницу
+	Cимвол @ используется для определения начала фрагмента серверного кода в HTML разметке
+	весь Razor код выполняется на сервере, а на клиента отправляется только HTML разметка полученная в результате выполнения Razor
+*@
+
+@*@using SimpleApp.Models*@ @*явный способ подключения модели*@
+@*@model IEnumerable<Product>*@ @*явный способ подключения коллекции модели*@
+
+@{
+	Layout = null; // не использовать компоновку.
+				   // Компоновки необходимы для создания страниц по шаблону. Будут рассмотрены в следующих уроках
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>List</title>
+	<link href="~/styles.css" rel="stylesheet" />
+</head>
+<body>
+	<h2>Список продуктов</h2>
+	<table>
+		@*
+			Model - свойство доступное в представлениях. Дает возможность получить доступ к модели, которую передал контролер.
+			В данный момент в свойстве Model находиться коллекция экземпляров класса Product. (см. параметр метода View в контроллере).
+			Переменная item типа dynamic но на момент выполнения кода в ней будет находиться экземпляров класса Product.
+		*@
+
+		@*Сводка: Model
+			Получает свойство Model объекта Microsoft.AspNetCore.Mvc.Razor.RazorPage`1.ViewData*@
+
+		@foreach (var item in Model) {
+		<tr>
+			<td>@item.Id</td>
+			<td>@item.Name</td>
+			<td>@item.Description</td>
+			<td>
+				@if (@item.Count > 5) {
+					<p>В наличии</p>
+				} else if (@item.Count > 0) {
+					<p>Заканчивается</p>
+				} else {
+					<p>Нет в наличии</p>
+				}
+				</td>
+			<td>
+				@*Ссылка на другое представление в которое будет передаваться Id*@
+				<a href="/Products/Details/@item.Id">Подробнее...</a>
+			</td>
+		</tr>
+		}
+	</table>
+	@*
+		Если условие выполняется отображается один фрагмент HTML кода.
+		Иначе отображается блок HTML кода else
+	*@
+	@if (Model.Count != 0) {
+		<p>
+			Всего: @Model.Count
+		</p>
+	} else {
+		<p>
+			Список пуст.
+		</p>
+	}
+</body>
+</html>
+
+

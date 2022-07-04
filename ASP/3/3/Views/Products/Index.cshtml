@@ -1,0 +1,21 @@
+﻿@model List<_3.Models.Product>
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Index</title>
+</head>
+<body>
+	<p> Id	Name	Price</p>
+	@foreach (var item in Model) {
+		<p>@item.Id .
+		@item.Name .
+		@item.Price</p>
+	}
+</body>
+</html>
